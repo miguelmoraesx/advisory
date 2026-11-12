@@ -20,11 +20,7 @@
 
 ## Summary
 
-> The `admin/parcel_carriers.php` page accepts the `carrier_name` and `carrier_tracking_link` fields when an administrator creates or updates a parcel carrier. Although these values are processed before being written to the database, they are not HTML-encoded when later rendered in the administration interface. As a result, attacker-controlled HTML and JavaScript can be stored as part of a carrier record and interpreted by the browser instead of being displayed as plain text.
->
-> The stored payload reaches multiple output locations: the parcel carrier listing, the carrier information box, and the shipping information displayed on `admin/orders.php`. An authenticated administrator with permission to manage parcel carriers can therefore create or modify a carrier containing a persistent XSS payload. The payload remains in the database until the affected record is edited or removed and executes in the context of the administrative application when another administrator opens an affected view.
->
-> Successful exploitation could allow the attacker to modify the administrative interface, display deceptive content, access information available to client-side scripts, or perform authenticated actions through the victim's browser. Exploitation requires an authenticated account with access to the carrier-management functionality; no unauthenticated injection vector was identified. This prerequisite reduces the severity, but the persistent and cross-administrator nature of the issue means that one compromised or malicious privileged account can affect other administrative users.
+> The `admin/parcel_carriers.php` page stores the `carrier_name` and `carrier_tracking_link` fields without safely HTML-encoding them when they are rendered. An authenticated administrator with access to carrier management can therefore store a persistent XSS payload that executes when another administrator views the carrier listing, carrier information box, or affected order details in `admin/orders.php`. The payload remains in the database until the carrier record is edited or removed and may allow modification of the admin interface or actions within the victim's authenticated session.
 
 ---
 
