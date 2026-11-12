@@ -20,7 +20,7 @@
 
 ## Summary
 
-> The module configuration save handler in `admin/modules.php` escapes the posted configuration value (`$value`) before writing it to the database, but not the array key (`$key`). An authenticated admin with access to the modules management page can submit a crafted `configuration[<key>]` array key that breaks out of the `UPDATE ... WHERE configuration_key = '...'` clause, allowing arbitrary SQL conditions to be injected. This was confirmed with a time-based blind injection using `SLEEP()`. The vulnerability is present in v3.3.0, the latest released version; a fix exists upstream but has not shipped in any release yet.
+> The module configuration save handler in `admin/modules.php` escapes the posted configuration value (`$value`) before writing it to the database, but not the array key (`$key`). An authenticated admin with access to the modules management page can submit a crafted `configuration[<key>]` array key that breaks out of the `UPDATE ... WHERE configuration_key = '...'` clause, allowing arbitrary SQL conditions to be injected. This was confirmed with a time-based blind injection using `SLEEP()`, producing response delays that matched the injected duration. By manipulating the query condition, an attacker may infer database information or affect configuration rows beyond the intended module. The vulnerability is present in v3.3.0, the latest released version; a fix exists upstream but has not shipped in any release yet.
 
 ---
 
