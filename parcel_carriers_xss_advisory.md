@@ -103,17 +103,17 @@ curl -i 'http://127.0.0.1:8080/admin/parcel_carriers.php?page=1&action=insert' \
 
 In the browser, it should look like this
 
-![[Pasted image 20261111152133.png]]
+![Carrier creation form containing the stored XSS payload](images/Pasted%20image%2020261111152133.png)
 
 3. After inserting, navigate to `/admin/parcel_carriers.php`. If done through the browser, it should be automatic.
 4. Observe the payload executing in the page context. (Sinks 1 and 2)
 	1. The name payload triggers three times (highlighted below) when the carrier is selected (one when not), while the tracker url triggers once (on the table column)
-![[Pasted image 20261111153528.png]]
+![Stored XSS executing on the parcel carriers page](images/Pasted%20image%2020261111153528.png)
 
 5. Navigate to `/admin/orders.php`. Select any order listed, or any order from any user.
 6. Observe the payload executing by the `Shipping` selector (Sink 3)
 
-![[Pasted image 20261111153918.png]]
+![Stored XSS executing on the order details page](images/Pasted%20image%2020261111153918.png)
 
 ---
 
