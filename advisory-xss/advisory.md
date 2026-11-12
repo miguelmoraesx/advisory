@@ -20,7 +20,7 @@
 
 ## Summary
 
-> The `admin/parcel_carriers.php` page stores the `carrier_name` and `carrier_tracking_link` fields without safely HTML-encoding them when they are rendered. An authenticated administrator with access to carrier management can therefore store a persistent XSS payload that executes when another administrator views the carrier listing, carrier information box, or affected order details in `admin/orders.php`. The payload remains in the database until the carrier record is edited or removed and may allow modification of the admin interface or actions within the victim's authenticated session.
+> The `admin/parcel_carriers.php` page stores the `carrier_name` and `carrier_tracking_link` fields without safely HTML-encoding them when they are rendered. Because these values are reused across multiple administrative views, an authenticated administrator with access to carrier management can store a persistent XSS payload that executes when another administrator views the carrier listing, carrier information box, or affected order details in `admin/orders.php`. The payload remains in the database until the carrier record is edited or removed and may allow modification of the admin interface, access to data exposed to client-side scripts, or actions within the victim's authenticated session. No unauthenticated injection vector was identified.
 
 ---
 
